@@ -1,4 +1,4 @@
-const container = document.getElementById("container");
+const container = document.querySelector(".container");
 
 fetch("http://openlibrary.org/search.json?q=javascript")
   .then((res) => res.json())
@@ -16,20 +16,31 @@ function showData(data) {
     const title = book.title;
     const authorName = book.author_name?.[0];
     const publisher = book.publisher?.[0];
-    const firsPublish = book.first_publish_year;
+    const firstPublish = book.first_publish_year;
     const coverImage = book.cover_i;
 
     console.log("Book Title:", title);
-    console.log("Authors array:", authorName);
+    if (authorName !== undefined) console.log("Author:", authorName);
     //   authorName.forEach((author) => console.log("author:", author));
-    console.log("Publishers array:", publisher);
+    if (publisher !== undefined) console.log("Publisher:", publisher);
     //   publisher.forEach((publisher) => console.log("publisher:", publisher));
-    console.log("First Publsh:", firsPublish);
-    console.log("cover code:", coverImage);
+    if (coverImage !== undefined) console.log("First Publsh:", firstPublish);
+    if (coverImage !== undefined) console.log("cover code:", coverImage);
 
-    const p = document.createElement("p");
-    p.innerText = `Author: ${authorName}  Publisher: ${publisher}`;
-    container.appendChild(p);
+    const div = document.createElement("div");
+    div.innerHTML = `<img src="https://covers.openlibrary.org/b/id/${coverImage}-M.jpg" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">${title}</li>
+        <li class="list-group-item">${authorName}</li>
+        <li class="list-group-item">${publisher}</li>
+        <li class="list-group-item">${firstPublish}</li>
+      </ul>
+    </div>`;
+    div.classList.add("card");
+
+    div.setAttribute("style", "width: 18rem");
+    container.appendChild(div);
   });
 
   //   for (let i = 0; i < books.length; i++) {
