@@ -11,21 +11,26 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <style>
-      .container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-column-gap: 10px;
-        grid-row-gap: 20px;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
-      <h1>Here are the books for your search results</h1>
+      <div id="search-section">
+        <input
+          type="text"
+          placeholder="Write topic to search books"
+          id="input-search"
+        />
+        <br />
+        <button id="btn-search">Search books</button>
+      </div>
     </header>
     <main>
-      <div class="container"></div>
+      <div class="container">
+        <h3 id="total-search"></h3>
+
+        <div class="books-container"></div>
+      </div>
     </main>
     <script src="script.js"></script>
   </body>

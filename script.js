@@ -1,49 +1,64 @@
-const container = document.querySelector(".container");
+const container = document.querySelector(".books-container");
+const totalSearch = document.getElementById("total-search");
+const inputSearch = document.getElementById("input-search");
+const btnSearch = document.getElementById("btn-search");
 
-fetch("http://openlibrary.org/search.json?q=javascript")
-  .then((res) => res.json())
-  .then((data) => showData(data));
+/**************************************************
+ **calling API on clicking the search button**
+ ***************************************************/
+btnSearch.addEventListener("click", function () {
+  const search = inputSearch.value;
+  fetch(`http://openlibrary.org/search.json?q=${search}`)
+    .then((res) => res.json())
+    .then((data) => showData(data));
+});
+
+/**************************************************
+ **function declaring for showing the results**
+ ***************************************************/
 
 function showData(data) {
+  container.textContent = "";
   const resultFound = data.numFound;
   const books = data.docs;
-
-  console.log("result found:", resultFound);
   console.log(books);
-  console.log(books[0].publisher[0]);
+  totalSearch.innerText = `Showing ${books.length} results of total ${resultFound} for ${inputSearch.value}...`;
+
+  /**********************************************************
+   **Looping the array containing the books information**
+   **********************************************************/
 
   books.forEach((book) => {
     const title = book.title;
-    const authorName = book.author_name?.[0];
-    const publisher = book.publisher?.[0];
-    const firstPublish = book.first_publish_year;
+    const authorName = book.author_name?.[0] || "Not found";
+    const publisher = book.publisher?.[0] || "Not found";
+    const firstPublish = book.first_publish_year || "Not found";
     const coverImage = book.cover_i;
 
-    console.log("Book Title:", title);
-    if (authorName !== undefined) console.log("Author:", authorName);
-    //   authorName.forEach((author) => console.log("author:", author));
-    if (publisher !== undefined) console.log("Publisher:", publisher);
-    //   publisher.forEach((publisher) => console.log("publisher:", publisher));
-    if (coverImage !== undefined) console.log("First Publsh:", firstPublish);
-    if (coverImage !== undefined) console.log("cover code:", coverImage);
+    /*Determining the image Source.
+    books those have no original image get the image from local source*/
 
+    let imageSource;
+    if (coverImage !== undefined)
+      imageSource = `https://covers.openlibrary.org/b/id/${coverImage}-M.jpg`;
+    else imageSource = "images/bookCover.png";
+
+    /**************************************************
+     **creating div to show every book found**
+     ***************************************************/
     const div = document.createElement("div");
-    div.innerHTML = `<img src="https://covers.openlibrary.org/b/id/${coverImage}-M.jpg" class="card-img-top" alt="..." />
+    div.innerHTML = `<img src=${imageSource} class="card-img-top" alt="..." />
     <div class="card-body">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">${title}</li>
-        <li class="list-group-item">${authorName}</li>
-        <li class="list-group-item">${publisher}</li>
-        <li class="list-group-item">${firstPublish}</li>
+        <li class="list-group-item">Title: <b>${title}</b></li>
+        <li class="list-group-item">Author: <b>${authorName}</b></li>
+        <li class="list-group-item">Publisher: <b>${publisher}</b></li>
+        <li class="list-group-item">First Published: <b>${firstPublish}</b></li>
       </ul>
     </div>`;
     div.classList.add("card");
-
     div.setAttribute("style", "width: 18rem");
     container.appendChild(div);
   });
-
-  //   for (let i = 0; i < books.length; i++) {
-  //     console.log(i + 1, books[i].publisher);
-  //   }
+  inputSearch.value = "";
 }
