@@ -47,7 +47,7 @@ const showData = (data) => {
     totalSearch.innerText = `Showing ${books.length} results of total ${resultFound} for "${inputSearch.value}"...`;
   else {
     errorMsg.style.display = "block";
-    errorMsg.innerText = `Sorry! No book Found for "${inputSearch.value}"`;
+    errorMsg.innerText = `Sorry! No result Found for "${inputSearch.value}"`;
   }
   /**********************************************************
    **Looping the array containing the books information**
