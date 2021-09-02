@@ -51,6 +51,7 @@ const showData = (data) => {
   }
   /**********************************************************
    **Looping the array containing the books information**
+                 using forEach method
    **********************************************************/
 
   books.forEach((book) => {
