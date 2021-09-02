@@ -45,14 +45,14 @@ body {
 }
 .container {
   background-color: transparent;
+  display: flex;
+  justify-content: center;
 }
-/* .container h3 {
-  color: whitesmoke;
-} */
+
 .books-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 0px;
+  grid-column-gap: 20px;
   grid-row-gap: 20px;
   margin-top: 30px;
 }
