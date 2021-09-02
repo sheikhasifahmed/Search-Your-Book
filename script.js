@@ -3,6 +3,7 @@ const totalSearch = document.getElementById("total-search");
 const inputSearch = document.getElementById("input-search");
 const btnSearch = document.getElementById("btn-search");
 const errorMsg = document.getElementById("error-msg");
+const loader = document.getElementById("loader");
 
 /**************************************************
  **calling API on clicking the search button**
@@ -10,8 +11,10 @@ const errorMsg = document.getElementById("error-msg");
 btnSearch.addEventListener("click", function () {
   container.textContent = "";
   totalSearch.textContent = "";
+  loader.style.display = "block";
   const search = inputSearch.value;
   if (search === "") {
+    loader.style.display = "none";
     errorMsg.style.display = "block";
     errorMsg.innerText = "No input detected! Nothing to search.";
   } else {
@@ -80,5 +83,6 @@ const showData = (data) => {
     div.setAttribute("style", "width: 18rem");
     container.appendChild(div);
   });
+  loader.style.display = "none";
   inputSearch.value = "";
 };

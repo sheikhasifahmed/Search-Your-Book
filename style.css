@@ -41,7 +41,11 @@ body {
   grid-row-gap: 20px;
   margin-top: 30px;
 }
-
+#loader {
+  text-align: center;
+  color: yellowgreen;
+  display: none;
+}
 #error-msg {
   text-align: center;
   color: rgb(238, 12, 12);
