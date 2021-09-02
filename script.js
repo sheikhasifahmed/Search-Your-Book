@@ -19,13 +19,14 @@ btnSearch.addEventListener("click", function () {
     errorMsg.innerText = "No input detected! Nothing to search.";
   } else {
     errorMsg.style.display = "none";
-    fetch(`http://openlibrary.org/search.json?q=${search}`)
+    fetch(`https://openlibrary.org/search.json?q=${search}`)
       .then((res) => res.json())
       .then((data) => showData(data))
       .catch((error) => {
         console.log(error);
         totalSearch.style.display = "none";
         errorMsg.style.display = "block";
+        loader.style.display = "none";
       });
   }
 });
