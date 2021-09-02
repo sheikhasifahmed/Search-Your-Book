@@ -1,12 +1,27 @@
 body {
   /* background-color: rgb(56, 66, 56); */
   /* background-color: #ccd0d5; */
-  background-color: #07131fc0;
+  background-image: linear-gradient(
+    to right,
+    rgba(52, 43, 66, 0.445),
+    rgba(40, 23, 47, 0.342)
+  );
+}
+#welcome {
+  text-align: center;
+  color: rgb(68, 4, 4);
+  margin-top: 20px;
+  font-weight: 900;
 }
 #search-section {
   text-align: center;
   margin-top: 80px;
   margin-bottom: 50px;
+  background-color: whitesmoke;
+  width: 70%;
+  padding: 20px 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #input-search {
@@ -31,9 +46,9 @@ body {
 .container {
   background-color: transparent;
 }
-.container h3 {
+/* .container h3 {
   color: whitesmoke;
-}
+} */
 .books-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -43,8 +58,9 @@ body {
 }
 #loader {
   text-align: center;
-  color: yellowgreen;
+  color: orangered;
   display: none;
+  font-weight: 900;
 }
 #error-msg {
   text-align: center;

@@ -36,6 +36,7 @@ btnSearch.addEventListener("click", function () {
  ***************************************************/
 
 const showData = (data) => {
+  console.log(data);
   const resultFound = data.numFound;
   const books = data.docs;
   console.log(data, books);
@@ -43,7 +44,7 @@ const showData = (data) => {
   // error handling for no result found
 
   if (resultFound !== 0)
-    totalSearch.innerText = `Showing ${books.length} results of total ${resultFound} for "${inputSearch.value}"...`;
+    totalSearch.innerText = `Showing ${books.length} results of total ${resultFound} for "${inputSearch.value}"`;
   else {
     errorMsg.style.display = "block";
     errorMsg.innerText = `Sorry! No book Found for "${inputSearch.value}"`;
