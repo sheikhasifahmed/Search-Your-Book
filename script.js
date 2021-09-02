@@ -11,12 +11,19 @@ btnSearch.addEventListener("click", function () {
   container.textContent = "";
   totalSearch.textContent = "";
   const search = inputSearch.value;
-  if (search === "") errorMsg.style.display = "block";
-  else {
+  if (search === "") {
+    errorMsg.style.display = "block";
+    errorMsg.innerText = "No input detected! Nothing to search.";
+  } else {
     errorMsg.style.display = "none";
     fetch(`http://openlibrary.org/search.json?q=${search}`)
       .then((res) => res.json())
-      .then((data) => showData(data));
+      .then((data) => showData(data))
+      .catch((error) => {
+        console.log(error);
+        totalSearch.style.display = "none";
+        errorMsg.style.display = "block";
+      });
   }
 });
 
@@ -24,12 +31,19 @@ btnSearch.addEventListener("click", function () {
  **function declaring for showing the results**
  ***************************************************/
 
-function showData(data) {
+const showData = (data) => {
   const resultFound = data.numFound;
   const books = data.docs;
+  console.log(data, books);
 
-  totalSearch.innerText = `Showing ${books.length} results of total ${resultFound} for "${inputSearch.value}":`;
+  // error handling for no result found
 
+  if (resultFound !== 0)
+    totalSearch.innerText = `Showing ${books.length} results of total ${resultFound} for "${inputSearch.value}"...`;
+  else {
+    errorMsg.style.display = "block";
+    errorMsg.innerText = `Sorry! No book Found for "${inputSearch.value}"`;
+  }
   /**********************************************************
    **Looping the array containing the books information**
    **********************************************************/
@@ -67,4 +81,4 @@ function showData(data) {
     container.appendChild(div);
   });
   inputSearch.value = "";
-}
+};

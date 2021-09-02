@@ -1,6 +1,7 @@
 body {
   /* background-color: rgb(56, 66, 56); */
-  background-color: rgba(0, 0, 0, 0.63);
+  /* background-color: #ccd0d5; */
+  background-color: #07131fc0;
 }
 #search-section {
   text-align: center;
@@ -15,6 +16,10 @@ body {
   font-size: large;
   margin-bottom: 20px;
   border-radius: 10px;
+}
+#btn-search:hover {
+  background-color: whitesmoke;
+  color: black;
 }
 #btn-search {
   padding: 10px;
@@ -39,6 +44,6 @@ body {
 
 #error-msg {
   text-align: center;
-  color: rgb(126, 17, 17);
+  color: rgb(238, 12, 12);
   display: none;
 }
