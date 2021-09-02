@@ -2,15 +2,22 @@ const container = document.querySelector(".books-container");
 const totalSearch = document.getElementById("total-search");
 const inputSearch = document.getElementById("input-search");
 const btnSearch = document.getElementById("btn-search");
+const errorMsg = document.getElementById("error-msg");
 
 /**************************************************
  **calling API on clicking the search button**
  ***************************************************/
 btnSearch.addEventListener("click", function () {
+  container.textContent = "";
+  totalSearch.textContent = "";
   const search = inputSearch.value;
-  fetch(`http://openlibrary.org/search.json?q=${search}`)
-    .then((res) => res.json())
-    .then((data) => showData(data));
+  if (search === "") errorMsg.style.display = "block";
+  else {
+    errorMsg.style.display = "none";
+    fetch(`http://openlibrary.org/search.json?q=${search}`)
+      .then((res) => res.json())
+      .then((data) => showData(data));
+  }
 });
 
 /**************************************************
@@ -18,11 +25,10 @@ btnSearch.addEventListener("click", function () {
  ***************************************************/
 
 function showData(data) {
-  container.textContent = "";
   const resultFound = data.numFound;
   const books = data.docs;
-  console.log(books);
-  totalSearch.innerText = `Showing ${books.length} results of total ${resultFound} for ${inputSearch.value}...`;
+
+  totalSearch.innerText = `Showing ${books.length} results of total ${resultFound} for "${inputSearch.value}":`;
 
   /**********************************************************
    **Looping the array containing the books information**
